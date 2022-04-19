@@ -1,0 +1,84 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Test for Pay Evo";
+}
+ 
+<div class="text-center">
+    <h1 class="display-4">Kendo UI as Requested</h1>
+
+
+    
+</div>
+
+<div class="col-md-12">
+    <p>Kendo UI for PayEvo <strong id="kendoVersion"></strong> for this example</p>
+    <div id="kendoGrid"></div>
+
+
+</div>
+
+<script type="text/javascript">
+    $(document).ready(
+        function () {
+            $('#kendoVersion').text(kendo.version);
+            $('#kendoGrid').kendoGrid({
+                dataSource: CustomHelper.GridDataSource(),
+                columns: CustomHelper.GenerateColumns(),
+                editable: true,
+                navigatable: true,
+                selectable: "row",
+                filterable: true,
+                sortable: true,
+               }   
+            );
+        } 
+            
+    );
+    var CustomHelper = {
+        GenerateColumns: function () {
+            return columns = [
+                { field: "id", title: "Id", width: 30, editable: false },
+                { field: "user_name", title: "User Name", width: 30, editable: false },
+                { field: "client_name", title: "Client Name", width: 30, editable: false },
+            ]
+        },
+        GridDataSource: function () {
+            var GridDataSource = new kendo.data.DataSource({
+                type: "json",
+                serverPaging: true,
+                serverSorting: true,
+                serverFiltering: true,
+                allowUnsort: true,
+                pageSize: 15,
+                transport: {
+                    read: {
+                        url: 'https://api.harvestapp.com/v2/time_entries',
+                        type: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        headers: {
+                            'Authorization': 'Bearer 3033552.pt.14cZwk70CfW_4W9LkQNUrOrqoX5VoCPT8kz1NCtzAEfa9Yxd6fIzU_YRtcvt8rIJkGgKY5AH0tjnarIdqb9rtQ',
+                            'Harvest-Account-ID': '1596805',
+                        },
+
+                    },
+                },
+                schema: {
+                    model: {
+                       
+                        fields: {
+                            
+                        }
+                    },
+                }
+
+
+
+            });
+            return GridDataSource;
+
+        }
+    }
+
+</script>
