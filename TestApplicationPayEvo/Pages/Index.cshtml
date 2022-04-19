@@ -41,6 +41,7 @@
                 { field: "id", title: "Id", width: 30, editable: false },
                 { field: "user_name", title: "User Name", width: 30, editable: false },
                 { field: "client_name", title: "Client Name", width: 30, editable: false },
+
             ]
         },
         GridDataSource: function () {
@@ -66,9 +67,11 @@
                 },
                 schema: {
                     model: {
-                       
+                        id:"id",
                         fields: {
-                            
+                            id: { editable: false, nullable: true },
+                            user_name: { editable: true, nullable: true },
+                            client_name: { editable: true, nullable: true },
                         }
                     },
                 }
